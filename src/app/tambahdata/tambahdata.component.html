@@ -1,0 +1,19 @@
+<h1>Tambah Data Item</h1>
+
+<form (ngSubmit)="addItem()">
+  <div>
+    <label for="tanggal">Tanggal:</label>
+    <input type="date" id="tanggal" name="tanggal" [(ngModel)]="newItem.tanggal">
+    <button type="button" (click)="setToday()">Isi Tanggal Hari Ini</button>
+  </div>
+  <div>
+    <label for="nama">Item:</label>
+    <input type="text" id="nama" name="nama" [(ngModel)]="newItem.nama">
+  </div>
+  <div>
+    <label for="harga">Harga:</label>
+    <input type="number" id="harga" name="harga" [(ngModel)]="newItem.harga">
+  </div>
+  <button type="submit">Tambah</button>
+  <button (click)="goBack()">Kembali</button>
+</form>

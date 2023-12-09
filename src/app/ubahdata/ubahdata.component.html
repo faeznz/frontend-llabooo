@@ -1,0 +1,18 @@
+<h1>Ubah Data Item</h1>
+
+<form (ngSubmit)="updateItem()">
+  <div>
+    <label for="id">ID:</label>
+    <input type="text" id="id" name="id" [(ngModel)]="item.id">
+  </div>
+  <div>
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="nama" [(ngModel)]="item.nama">
+  </div>
+  <div>
+    <label for="harga">Harga:</label>
+    <input type="number" id="harga" name="harga" [(ngModel)]="item.harga">
+  </div>
+  <button type="submit">Ubah</button>
+  <button (click)="goBack()">Kembali</button>
+</form>
