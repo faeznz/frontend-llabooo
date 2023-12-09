@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
 
   years = [2023, 2024, 2025];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.fetchItems();
@@ -50,4 +51,8 @@ export class DashboardComponent implements OnInit {
   calculateTotalHarga() {
     this.totalHarga = this.items.reduce((sum, item) => sum + item.harga, 0);
   }  
+
+  navigateToAddPage() {
+    this.router.navigate(['/tambah']);
+  }
 }
