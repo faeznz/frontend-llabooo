@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchItems() {
-    const url = `http://localhost:3000/item?month=${this.selectedMonth}&year=${this.selectedYear}`;
+    const url = `https://blue-difficult-binturong.cyclic.app/item?month=${this.selectedMonth}&year=${this.selectedYear}`;
   
     this.http.get<any[]>(url)
       .subscribe(items => {
