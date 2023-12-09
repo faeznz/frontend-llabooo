@@ -1,10 +1,9 @@
-<head class="w-screen flex justify-center p-4 bg-pink-300">
-   <h1 class="text-3xl font-extrabold">Mammm</h1>
+<head class="w-screen flex justify-between p-2 bg-pink-300 items-center">
+   <h1 class="text-black text-3xl font-black">Mammm</h1>
+   <button class="text-white px-4 py-2 rounded text-2xl" (click)="navigateToAddPage()"><i class="fa-solid fa-plus"></i></button>
 </head>
 <body>
    <section class="m-4">
-      <button class="bg-pink-500 text-white px-4 py-2 rounded" (click)="navigateToAddPage()">Tambah Data</button>
-
       <div class="w-full flex flex-col my-8 gap-4">
          <div class="w-full flex">
            <label class="w-1/4" for="month">Bulan:</label>
@@ -35,7 +34,7 @@
                <td class="px-2 text-center">{{ item.tanggal }}</td>
                <td class="px-2">{{ item.nama }}</td>
                <td class="px-2">{{ item.harga | rupiah }}</td>
-               <td class="px-0 text-center">
+               <td class="p-2 text-center">
                  <button class="bg-pink-500 text-white px-2 py-1 rounded" (click)="deleteItem(item)"><i class="fa-solid fa-trash"></i></button>
                </td>
              </tr>

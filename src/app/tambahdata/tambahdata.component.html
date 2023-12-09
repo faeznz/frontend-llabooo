@@ -1,25 +1,33 @@
-<head>
-  <h1>Tambah Data Item</h1>
+<head class="w-screen flex justify-between p-2 bg-pink-300 items-center">
+  <button class="text-white px-4 py-2 rounded text-2xl" (click)="goBack()"><i class="fa-solid fa-angle-left"></i></button>
+  <h1 class="text-2xl font-extrabold">Tambah Mamm</h1>
+  <button class="text-white px-4 py-2 rounded text-2xl"></button>
 </head>
 
 <body class="w-screen">
-  <form class="gap-4 m-4" (ngSubmit)="addItem()">
+  <form class="m-4" (ngSubmit)="addItem()">
+
+    <div class="flex flex-col gap-4 my-4">
+      <label for="tanggal">Tanggal</label>
+      <div class="w-full flex justify-between">
+        <input class="w-3/4 px-4 py-2" type="date" id="tanggal" name="tanggal" [(ngModel)]="newItem.tanggal">
+        <button class="bg-pink-500 text-white px-4 py-2 rounded" type="button" (click)="setToday()">Hari Ini</button>
+      </div>
+    </div>
+
+    <div class="flex flex-col my-4">
+      <label for="nama">Mamm apa?</label>
+      <input class="px-4 py-2" type="text" id="nama" name="nama" [(ngModel)]="newItem.nama">
+    </div>
+
+    <div class="flex flex-col my-4">
+      <label for="harga">Harga</label>
+      <input class="px-4 py-2" type="number" id="harga" name="harga" [(ngModel)]="newItem.harga">
+    </div>
+
     <div class="flex flex-col">
-      <label for="tanggal">Tanggal:</label>
-      <input type="date" id="tanggal" name="tanggal" [(ngModel)]="newItem.tanggal">
-      <button type="button" (click)="setToday()">Isi Tanggal Hari Ini</button>
+      <button class="bg-pink-500 text-white px-4 py-2 rounded my-2" type="submit">Tambah</button>
     </div>
-    <div>
-      <label for="nama">Item:</label>
-      <input type="text" id="nama" name="nama" [(ngModel)]="newItem.nama">
-    </div>
-    <div>
-      <label for="harga">Harga:</label>
-      <input type="number" id="harga" name="harga" [(ngModel)]="newItem.harga">
-    </div>
-    <div class="flex flex-col">
-      <button class="m-2" type="submit">Tambah</button>
-      <button (click)="goBack()">Kembali</button>
-    </div>
+
   </form>
 </body>
