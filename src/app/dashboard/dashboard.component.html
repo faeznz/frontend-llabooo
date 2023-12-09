@@ -22,19 +22,23 @@
       </div>
       
       <table class="w-full my-8">
-         <thead class="bg-pink-500">
+         <thead class="bg-pink-500 text-white">
            <tr>
-             <th>Tanggal</th>
-             <th>Item</th>
-             <th>Harga</th>
+             <th class="p-2">Tgl</th>
+             <th class="p-2">Item</th>
+             <th class="p-2">Harga</th>
+             <th class="m-0 p-0"></th>
            </tr>
          </thead>
          <tbody>
-           <tr *ngFor="let item of items">
-             <td>{{ item.tanggal }}</td>
-             <td>{{ item.nama }}</td>
-             <td>{{ item.harga | rupiah }}</td>
-           </tr>
+            <tr *ngFor="let item of items">
+               <td class="px-2 text-center">{{ item.tanggal }}</td>
+               <td class="px-2">{{ item.nama }}</td>
+               <td class="px-2">{{ item.harga | rupiah }}</td>
+               <td class="px-0 text-center">
+                 <button class="bg-pink-500 text-white px-2 py-1 rounded" (click)="deleteItem(item)"><i class="fa-solid fa-trash"></i></button>
+               </td>
+             </tr>
          </tbody>
        </table>
    </section>

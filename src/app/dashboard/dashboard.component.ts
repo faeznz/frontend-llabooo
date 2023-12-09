@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchItems() {
-    const url = `https://blue-difficult-binturong.cyclic.app/item?month=${this.selectedMonth}&year=${this.selectedYear}`;
+    const url = `http://localhost:3000/item?month=${this.selectedMonth}&year=${this.selectedYear}`;
   
     this.http.get<any[]>(url)
       .subscribe(items => {
@@ -47,7 +47,23 @@ export class DashboardComponent implements OnInit {
         console.error('Failed to fetch items', error);
       });
   }
+
+  deleteItem(item: any): void {
+    const confirmation = confirm(`Apakah Anda yakin ingin menghapus item '${item.nama}'?`);
   
+    if (confirmation) {
+      // Panggil endpoint untuk menghapus item dari server
+      this.http.delete(`http://localhost:3000/item/${item._id}`)
+        .subscribe(() => {
+          // Hapus item dari array lokal
+          this.items = this.items.filter(i => i._id !== item._id);
+          this.calculateTotalHarga();
+        }, error => {
+          console.error('Failed to delete item', error);
+        });
+    }
+  }
+    
   calculateTotalHarga() {
     this.totalHarga = this.items.reduce((sum, item) => sum + item.harga, 0);
   }  
