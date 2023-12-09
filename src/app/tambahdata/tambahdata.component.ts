@@ -25,10 +25,4 @@ export class TambahdataComponent {
   goBack() {
     this.router.navigate(['/itemDashboard']);
   }
-
-  setToday() {
-    const today = new Date();
-    const isoDate = today.toISOString().split('T')[0];
-    this.newItem.tanggal = isoDate;
-  }
 }
