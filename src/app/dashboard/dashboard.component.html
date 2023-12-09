@@ -4,6 +4,7 @@
 </head>
 <body>
    <section class="m-4">
+      <div *ngIf="loading">Loading...</div>
       <div class="w-full flex flex-col my-8 gap-4">
          <div class="w-full flex">
            <label class="w-1/4" for="month">Bulan:</label>
@@ -20,7 +21,7 @@
          </div>
       </div>
       
-      <table class="w-full my-8">
+      <table class="w-full my-8" *ngIf="!loading">
          <thead class="bg-pink-500 text-white">
            <tr>
              <th class="p-2">Tgl</th>
@@ -43,8 +44,14 @@
    </section>
     
    <section>
-      <div>
-        <h2>Total Harga Bulan Ini: {{ totalHarga | rupiah }}</h2>
+      <h1 class="text-center text-2xl">Statistik</h1>
+      <div class="flex flex-col items-center m-4">
+        <h2 class="mb-2">Total Pengeluaran Bulan Ini: </h2>
+        <div class="bg-pink-500 text-white w-full p-4 text-center rounded-xl text-3xl font-bold">{{ totalHarga | rupiah }}</div>
+      </div>
+      <div class="flex flex-col items-center m-4">
+        <h2 class="mb-2">Sisa Budget Bulan Ini: </h2>
+        <div class="bg-pink-500 text-white w-full p-4 text-center rounded-xl text-3xl font-bold">{{ sisaBudget | rupiah }}</div>
       </div>
    </section>
 </body>

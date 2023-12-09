@@ -9,9 +9,11 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   items: any[] = [];
-  selectedMonth: number = new Date().getMonth() + 1; // Initial value is the current month
-  selectedYear: number = new Date().getFullYear(); // Initial value is the current year
+  selectedMonth: number = new Date().getMonth() + 1;
+  selectedYear: number = new Date().getFullYear();
   totalHarga: number = 0;
+  sisaBudget: number = 0;
+  loading: boolean = false;
 
   months = [
     { value: 1, name: 'Januari' },
@@ -37,14 +39,18 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchItems() {
+    this.loading = true;
     const url = `https://blue-difficult-binturong.cyclic.app/item?month=${this.selectedMonth}&year=${this.selectedYear}`;
   
     this.http.get<any[]>(url)
       .subscribe(items => {
         this.items = items;
         this.calculateTotalHarga();
+        this.calculateSisaBudget();
+        this.loading = false;
       }, error => {
         console.error('Failed to fetch items', error);
+        this.loading = false;
       });
   }
 
@@ -66,7 +72,12 @@ export class DashboardComponent implements OnInit {
     
   calculateTotalHarga() {
     this.totalHarga = this.items.reduce((sum, item) => sum + item.harga, 0);
-  }  
+  }
+
+  calculateSisaBudget() {
+    const totalPengeluaran = this.totalHarga;
+    this.sisaBudget = 1200000 - totalPengeluaran;
+  }
 
   navigateToAddPage() {
     this.router.navigate(['/tambah']);
