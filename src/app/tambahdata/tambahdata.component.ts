@@ -13,7 +13,7 @@ export class TambahdataComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   addItem() {
-    this.http.post('http://localhost:3000/item', this.newItem)
+    this.http.post('https://blue-difficult-binturong.cyclic.app/item', this.newItem)
       .subscribe(() => {
         console.log('Data item berhasil ditambahkan');
         this.router.navigate(['/itemDashboard']);
