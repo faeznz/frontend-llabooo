@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchItems() {
-    const url = `http://localhost:3000/item?month=${this.selectedMonth}&year=${this.selectedYear}`;
+    const url = `https://blue-difficult-binturong.cyclic.app/item?month=${this.selectedMonth}&year=${this.selectedYear}`;
   
     this.http.get<any[]>(url)
       .subscribe(items => {
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
   
     if (confirmation) {
       // Panggil endpoint untuk menghapus item dari server
-      this.http.delete(`http://localhost:3000/item/${item._id}`)
+      this.http.delete(`https://blue-difficult-binturong.cyclic.app/item/${item._id}`)
         .subscribe(() => {
           // Hapus item dari array lokal
           this.items = this.items.filter(i => i._id !== item._id);
