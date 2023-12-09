@@ -1,37 +1,47 @@
-<h1>Item Dashboard</h1>
+<head class="w-screen flex justify-center p-4 bg-pink-300">
+   <h1 class="text-3xl font-extrabold">Mammm</h1>
+</head>
+<body>
+   <section class="m-4">
 
-<div>
-  <label for="month">Bulan:</label>
-  <select id="month" name="month" [(ngModel)]="selectedMonth" (change)="fetchItems()">
-    <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
-  </select>
-</div>
-
-<div>
-  <label for="year">Tahun:</label>
-  <select id="year" name="year" [(ngModel)]="selectedYear" (change)="fetchItems()">
-    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-  </select>
-</div>
-
-<table>
-   <thead>
-     <tr>
-       <th>Tanggal</th>
-       <th>Item</th>
-       <th>Harga</th>
-     </tr>
-   </thead>
-   <tbody>
-     <tr *ngFor="let item of items">
-       <td>{{ item.tanggal }}</td>
-       <td>{{ item.nama }}</td>
-       <td>{{ item.harga | rupiah }}</td>
-     </tr>
-   </tbody>
- </table>
- 
- <div>
-   <h2>Total Harga Bulan Ini: {{ totalHarga | rupiah }}</h2>
- </div>
+      <div class="w-full flex flex-col my-8 gap-4">
+         <div class="w-full flex">
+           <label class="w-1/4" for="month">Bulan:</label>
+           <select class="h-8 w-1/2 px-2" id="month" name="month" [(ngModel)]="selectedMonth" (change)="fetchItems()">
+             <option class="p-2" *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+           </select>
+         </div>
+         
+         <div class="w-full flex">
+           <label class="w-1/4" for="year">Tahun:</label>
+           <select class="h-8 w-1/2 px-2" id="year" name="year" [(ngModel)]="selectedYear" (change)="fetchItems()">
+             <option class=" p-2" *ngFor="let year of years" [value]="year">{{ year }}</option>
+           </select>
+         </div>
+      </div>
+      
+      <table class="w-full my-8">
+         <thead class="bg-pink-500">
+           <tr>
+             <th>Tanggal</th>
+             <th>Item</th>
+             <th>Harga</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let item of items">
+             <td>{{ item.tanggal }}</td>
+             <td>{{ item.nama }}</td>
+             <td>{{ item.harga | rupiah }}</td>
+           </tr>
+         </tbody>
+       </table>
+   </section>
+    
+   <section>
+      <div>
+        <h2>Total Harga Bulan Ini: {{ totalHarga | rupiah }}</h2>
+      </div>
+   </section>
+</body>
  
