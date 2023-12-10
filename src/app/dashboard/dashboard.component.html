@@ -6,7 +6,7 @@
 </head>
 <body>
    <section class="m-4">
-      <div *ngIf="loading">Loading...</div>
+      <div *ngIf="loading">Loading Tabel...</div>
       <div class="w-full flex flex-col my-8 gap-4">
          <div class="w-full flex">
            <label class="w-1/4" for="month">Bulan:</label>
@@ -23,26 +23,28 @@
          </div>
       </div>
       
-      <table class="w-full my-8" *ngIf="!loading">
-         <thead class="bg-pink-500 text-white">
-           <tr>
-             <th class="p-2">Tgl</th>
-             <th class="p-2">Item</th>
-             <th class="p-2">Harga</th>
-             <th class="m-0 p-0"></th>
-           </tr>
-         </thead>
-         <tbody>
-            <tr *ngFor="let item of items">
-               <td class="px-2 text-center">{{ item.tanggal }}</td>
-               <td class="px-2">{{ item.nama }}</td>
-               <td class="px-2">{{ item.harga | rupiah }}</td>
-               <td class="p-2 text-center">
-                 <button class="bg-pink-500 text-white px-2 py-1 rounded" (click)="deleteItem(item)"><i class="fa-solid fa-trash"></i></button>
-               </td>
-             </tr>
-         </tbody>
-       </table>
+      <div class="w-full max-h-64 overflow-y-auto">
+        <table *ngIf="!loading">
+          <thead class="bg-pink-500 text-white sticky top-0">
+            <tr>
+              <th class="p-2">Tgl</th>
+              <th class="p-2">Item</th>
+              <th class="p-2">Harga</th>
+              <th class="m-0 p-0"></th>
+            </tr>
+          </thead>
+           <tbody>
+              <tr *ngFor="let item of items">
+                 <td class="px-2 text-center">{{ item.tanggal }}</td>
+                 <td class="px-2">{{ item.nama }}</td>
+                 <td class="px-2">{{ item.harga | rupiah }}</td>
+                 <td class="p-2 text-center">
+                   <button class="bg-pink-500 text-white px-2 py-1 rounded" (click)="deleteItem(item)"><i class="fa-solid fa-trash"></i></button>
+                 </td>
+               </tr>
+           </tbody>
+         </table>
+      </div>
    </section>
     
    <section>
