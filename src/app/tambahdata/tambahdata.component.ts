@@ -9,10 +9,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TambahdataComponent {
   newItem: any = { tanggal: '' };
+  loading: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) { }
 
   addItem() {
+    this.loading = true;
     this.http.post('https://blue-difficult-binturong.cyclic.app/item', this.newItem)
       .subscribe(() => {
         console.log('Data item berhasil ditambahkan');

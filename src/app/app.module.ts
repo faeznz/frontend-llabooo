@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TambahdataComponent } from './tambahdata/tambahdata.component';
 import { UbahdataComponent } from './ubahdata/ubahdata.component';
-
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'tambah', component: TambahdataComponent },

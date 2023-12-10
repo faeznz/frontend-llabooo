@@ -5,6 +5,9 @@
 </head>
 
 <body class="w-screen">
+  <div *ngIf="loading" class="w-screen h-screen absolute block z-10 top-0 bg-black/30 place-self-center">
+    <div>Loading...</div>
+  </div>
   <form class="m-4" (ngSubmit)="addItem()">
 
     <div class="flex flex-col gap-4 my-4">
@@ -25,6 +28,5 @@
     <div class="flex flex-col">
       <button class="bg-pink-500 text-white px-4 py-2 rounded my-2" type="submit">Tambah</button>
     </div>
-
   </form>
 </body>
