@@ -46,6 +46,9 @@ export class DashboardComponent implements OnInit {
   
     this.http.get<any[]>(url)
       .subscribe(items => {
+        // Sort items by date in ascending order
+        items.sort((a, b) => new Date(a.tanggal).getTime() - new Date(b.tanggal).getTime());
+  
         this.items = items;
         this.calculateTotalHarga();
         this.calculateSisaBudget();
@@ -55,7 +58,7 @@ export class DashboardComponent implements OnInit {
         this.loading = false;
       });
   }
-
+  
   deleteItem(item: any): void {
     const confirmation = confirm(`Apakah Anda yakin ingin menghapus item '${item.nama}'?`);
   
