@@ -66,9 +66,9 @@ export class DashboardComponent implements OnInit {
       // Panggil endpoint untuk menghapus item dari server
       this.http.delete(`https://blue-difficult-binturong.cyclic.app/item/${item._id}`)
         .subscribe(() => {
-          // Hapus item dari array lokal
           this.items = this.items.filter(i => i._id !== item._id);
           this.calculateTotalHarga();
+          this.fetchWeeklyExpenses();
         }, error => {
           console.error('Failed to delete item', error);
         });
