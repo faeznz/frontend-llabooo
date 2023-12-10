@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchWeeklyExpenses() {
-    const weeks = [[1, 7], [8, 14], [15, 21], [22, 28]];
+    const weeks = [[1, 8], [9, 16], [17, 24], [25, 32]];
   
     this.weeklyExpenses = [];
   
