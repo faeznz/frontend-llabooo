@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   totalHarga: number = 0;
   sisaBudget: number = 0;
   loading: boolean = false;
+  weeklyExpenses: number[] = [];
 
   months = [
     { value: 1, name: 'Januari' },
@@ -36,6 +37,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.fetchItems();
+    this.fetchWeeklyExpenses();
   }
 
   fetchItems() {
@@ -82,4 +84,47 @@ export class DashboardComponent implements OnInit {
   navigateToAddPage() {
     this.router.navigate(['/tambah']);
   }
+
+  fetchWeeklyExpenses() {
+    const weeks = [[1, 7], [8, 14], [15, 21], [22, 28]];
+  
+    this.weeklyExpenses = [];
+  
+    // Create an array to store all promises
+    const promises = weeks.map((week) => {
+      const [startDay, endDay] = week;
+      const startOfMonth = new Date(this.selectedYear, this.selectedMonth - 1, startDay);
+      const endOfMonth = new Date(this.selectedYear, this.selectedMonth - 1, endDay);
+  
+      const url = `https://blue-difficult-binturong.cyclic.app/weekly-expenses?startDate=${startOfMonth.toISOString()}&endDate=${endOfMonth.toISOString()}`;
+  
+      // Return the promise from the HTTP request
+      return this.http.get<any[]>(url).toPromise();
+    });
+  
+    // Use Promise.all to wait for all promises to resolve
+    Promise.all(promises)
+      .then((responses) => {
+        // Process the responses and push totalExpense to weeklyExpenses
+        responses.forEach((response) => {
+          if (response && response.length > 0) {
+            const totalExpense = response[0]?.totalExpense || 0;
+            this.weeklyExpenses.push(totalExpense);
+          }
+        });
+  
+        // Sort weeklyExpenses in ascending order based on the start day
+        this.weeklyExpenses.sort((a, b) => {
+          const startDayA = weeks[this.weeklyExpenses.indexOf(a)][0];
+          const startDayB = weeks[this.weeklyExpenses.indexOf(b)][0];
+          return startDayA - startDayB;
+        });
+      })
+      .catch((error) => {
+        console.error('Failed to fetch weekly expenses', error);
+      });
+  }
+  
+  
+
 }

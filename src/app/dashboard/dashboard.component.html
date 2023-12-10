@@ -24,7 +24,7 @@
       </div>
       
       <div class="w-full max-h-64 overflow-y-auto">
-        <table *ngIf="!loading">
+        <table class="w-full" *ngIf="!loading">
           <thead class="bg-pink-500 text-white sticky top-0">
             <tr>
               <th class="p-2">Tgl</th>
@@ -57,6 +57,25 @@
         <h2 class="mb-2">Sisa Budget Bulan Ini: </h2>
         <div class="bg-pink-500 text-white w-3/4 p-3 text-center rounded-xl text-xl font-bold">{{ sisaBudget | rupiah }}</div>
       </div>
+
+      <div class="flex flex-col items-center m-4">
+        <h2 class="mb-2">Total Pengeluaran per Minggu</h2>
+        <div class="w-full flex flex-wrap justify-between">
+
+          <div class="w-[48%]" *ngFor="let expense of weeklyExpenses; let i = index" >
+            <h2 class="mb-2 text-center text-sm">Minggu {{ i + 1 }}: </h2>
+            <div class="bg-pink-500 text-white w-full p-6 text-center rounded-xl text-l font-bold mb-2">
+              {{ expense | rupiah }}
+            </div>
+          </div>
+
+          
+        </div>
+        <div *ngIf="weeklyExpenses.length === 0" class="bg-pink-500 text-white w-3/4 p-3 text-center rounded-xl text-xl font-bold mb-2">
+          Data tidak tersedia
+        </div>
+      </div>
    </section>
+
 </body>
  
