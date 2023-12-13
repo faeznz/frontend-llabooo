@@ -97,38 +97,31 @@ export class DashboardComponent implements OnInit {
   fetchWeeklyExpenses() {
     const weeks = [[1, 8], [9, 16], [17, 24], [25, 32]];
     this.weeklyExpenses = [];
-
+  
     const promises = weeks.map((week) => {
       const [startDay, endDay] = week;
       const startOfMonth = new Date(this.selectedYear, this.selectedMonth - 1, startDay);
       const endOfMonth = new Date(this.selectedYear, this.selectedMonth - 1, endDay);
-
+  
       const url = this.apiService.getWeeklyExpensesUrl(
         startOfMonth.toISOString(),
         endOfMonth.toISOString()
       );
-
+  
       return this.http.get<any[]>(url).toPromise();
     });
-
+  
     Promise.all(promises)
       .then((responses) => {
         responses.forEach((response) => {
-          if (response && response.length > 0) {
-            const totalExpense = response[0]?.totalExpense || 0;
-            this.weeklyExpenses.push(totalExpense);
-          }
-        });
-
-        this.weeklyExpenses.sort((a, b) => {
-          const startDayA = weeks[this.weeklyExpenses.indexOf(a)][0];
-          const startDayB = weeks[this.weeklyExpenses.indexOf(b)][0];
-          return startDayA - startDayB;
+          const totalExpense = response && response.length > 0 ? response[0].totalExpense || 0 : 0;
+          this.weeklyExpenses.push(totalExpense);
         });
       })
       .catch((error) => {
         console.error('Failed to fetch weekly expenses', error);
       });
   }
+  
 
 }
