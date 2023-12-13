@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,7 +34,7 @@ export class DashboardComponent implements OnInit {
 
   years = [2023, 2024, 2025];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private apiService: ApiService, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.fetchItems();
@@ -42,36 +43,41 @@ export class DashboardComponent implements OnInit {
 
   fetchItems() {
     this.loading = true;
-    const url = `https://blue-difficult-binturong.cyclic.app/item?month=${this.selectedMonth}&year=${this.selectedYear}`;
-  
-    this.http.get<any[]>(url)
-      .subscribe(items => {
-        // Sort items by date in ascending order
+    const url = this.apiService.getItemUrl(this.selectedMonth, this.selectedYear);
+
+    this.http.get<any[]>(url).subscribe(
+      (items) => {
         items.sort((a, b) => new Date(a.tanggal).getTime() - new Date(b.tanggal).getTime());
-  
         this.items = items;
         this.calculateTotalHarga();
         this.calculateSisaBudget();
         this.loading = false;
-      }, error => {
+      },
+      (error) => {
         console.error('Failed to fetch items', error);
         this.loading = false;
-      });
+      }
+    );
   }
-  
+
   deleteItem(item: any): void {
+    this.loading = true;
     const confirmation = confirm(`Apakah Anda yakin ingin menghapus item '${item.nama}'?`);
-  
+    const url = this.apiService.deleteItemUrl(item._id);
+
     if (confirmation) {
-      // Panggil endpoint untuk menghapus item dari server
-      this.http.delete(`https://blue-difficult-binturong.cyclic.app/item/${item._id}`)
-        .subscribe(() => {
-          this.items = this.items.filter(i => i._id !== item._id);
+      this.http.delete(url).subscribe(
+        () => {
+          this.items = this.items.filter((i) => i._id !== item._id);
           this.calculateTotalHarga();
           this.fetchWeeklyExpenses();
-        }, error => {
+          this.loading = false;
+        },
+        (error) => {
           console.error('Failed to delete item', error);
-        });
+          this.loading = false;
+        }
+      );
     }
   }
     
@@ -90,33 +96,30 @@ export class DashboardComponent implements OnInit {
 
   fetchWeeklyExpenses() {
     const weeks = [[1, 8], [9, 16], [17, 24], [25, 32]];
-  
     this.weeklyExpenses = [];
-  
-    // Create an array to store all promises
+
     const promises = weeks.map((week) => {
       const [startDay, endDay] = week;
       const startOfMonth = new Date(this.selectedYear, this.selectedMonth - 1, startDay);
       const endOfMonth = new Date(this.selectedYear, this.selectedMonth - 1, endDay);
-  
-      const url = `https://blue-difficult-binturong.cyclic.app/weekly-expenses?startDate=${startOfMonth.toISOString()}&endDate=${endOfMonth.toISOString()}`;
-  
-      // Return the promise from the HTTP request
+
+      const url = this.apiService.getWeeklyExpensesUrl(
+        startOfMonth.toISOString(),
+        endOfMonth.toISOString()
+      );
+
       return this.http.get<any[]>(url).toPromise();
     });
-  
-    // Use Promise.all to wait for all promises to resolve
+
     Promise.all(promises)
       .then((responses) => {
-        // Process the responses and push totalExpense to weeklyExpenses
         responses.forEach((response) => {
           if (response && response.length > 0) {
             const totalExpense = response[0]?.totalExpense || 0;
             this.weeklyExpenses.push(totalExpense);
           }
         });
-  
-        // Sort weeklyExpenses in ascending order based on the start day
+
         this.weeklyExpenses.sort((a, b) => {
           const startDayA = weeks[this.weeklyExpenses.indexOf(a)][0];
           const startDayB = weeks[this.weeklyExpenses.indexOf(b)][0];
@@ -127,7 +130,5 @@ export class DashboardComponent implements OnInit {
         console.error('Failed to fetch weekly expenses', error);
       });
   }
-  
-  
 
 }
