@@ -6,9 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'https://distinct-pink-sheath-dress.cyclic.app/';
+  private baseUrl = 'https://sore-teal-eel-hose.cyclic.app/';
 
   constructor(private http: HttpClient) {}
+
+  getItemUrlId(itemId: string): string {
+    return `${this.baseUrl}/item/${itemId}`;
+  }
 
   getItemUrl(month: number, year: number): string {
     return `${this.baseUrl}/item?month=${month}&year=${year}`;
@@ -25,5 +29,28 @@ export class ApiService {
   addItem(item: any): Observable<void> {
     const url = `${this.baseUrl}/item`;
     return this.http.post<void>(url, item);
+  }
+
+  updateItemUrl(itemId: string): string {
+    return `${this.baseUrl}/items/${itemId}`;
+  }
+
+  addItemUrl(): string {
+    return `${this.baseUrl}/items`;
+  }
+
+  getItem(id: string): Observable<any> {
+    const url = this.getItemUrlId(id);
+    return this.http.get<any>(url);
+  }
+
+  deleteItem(itemId: string): Observable<void> {
+    const url = this.deleteItemUrl(itemId);
+    return this.http.delete<void>(url);
+  }
+
+  updateItem(itemId: string, item: any): Observable<void> {
+    const url = this.updateItemUrl(itemId);
+    return this.http.put<void>(url, item);
   }
 }

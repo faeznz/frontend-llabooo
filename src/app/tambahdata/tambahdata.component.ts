@@ -1,7 +1,6 @@
 // tambahdata.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../api.service';
 
 @Component({
