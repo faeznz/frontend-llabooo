@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   totalHarga: number = 0;
   sisaBudget: number = 0;
   loading: boolean = false;
+  isMenuOpen: boolean = false;
   weeklyExpenses: number[] = [];
 
   months = [
@@ -123,5 +124,12 @@ export class DashboardComponent implements OnInit {
       });
   }
   
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  hideMenu() {
+    this.isMenuOpen = false;
+  }
 
 }

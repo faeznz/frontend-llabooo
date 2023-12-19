@@ -14,6 +14,11 @@ export class ApiService {
     return `${this.baseUrl}/item/${itemId}`;
   }
 
+  getData(): Observable<any[]> {
+    const url = `${this.baseUrl}/item`;
+    return this.http.get<any[]>(url);
+  }
+
   getItemUrl(month: number, year: number): string {
     return `${this.baseUrl}/item?month=${month}&year=${year}`;
   }

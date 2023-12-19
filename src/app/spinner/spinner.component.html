@@ -1,0 +1,51 @@
+<head class="w-screen flex justify-between p-2 bg-pink-500 items-center">
+   <button (click)="toggleMenu()" class="text-white px-4 py-2 rounded text-2xl"><i class="fas fa-bars"></i></button>
+   <div class="flex flex-row justify-center items-center gap-2">
+     <img src="../../assets/pizza.png" alt="" class="w-12">
+     <h1 class="text-white text-3xl font-black">Mammm</h1>
+   </div>
+ </head>
+ <div id="menu" class="w-screen h-screen absolute flex flex-col z-10 top-0 bg-black/60 justify-between items-left" [ngClass]="{'hidden': !isMenuOpen}">
+   <div class="bg-pink-200 flex flex-col w-2/3 h-full">
+     <div class="flex w-full top-0 p-2">
+       <button (click)="hideMenu()" class="text-pink-500 px-4 py-2 rounded text-2xl"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+
+     <div class="flex flex-col justify-center w-full h-full gap-4">
+       <button class="text-pink-500 text-xl font-bold" routerLink="/dashboard">Home</button>
+       <button class="text-pink-500 text-xl font-bold" routerLink="/spinner">Spinner</button>
+     </div>
+
+   </div>
+ </div>
+ <body>
+   <div *ngIf="loading" class="w-screen h-screen absolute flex flex-col z-10 top-0 bg-black/70 justify-center items-center">
+     <div class="loadingio-spinner-double-ring-cwl4tjctq1"><div class="ldio-ad84adzkb5t">
+       <div></div>
+       <div></div>
+       <div><div></div></div>
+       <div><div></div></div>
+       </div></div>
+   </div>
+    <section class="">
+      <h1 class="text-pink-500 text-3xl font-black text-center mt-8 mb-16">Spinner Mammm</h1>
+      <div class="m-4 flex justify-center items-center">
+         <div class="container">
+            <button class="spinBtn" (click)="spin()"><i class="fa-solid fa-utensils"></i></button>
+           <div class="wheel" [style.transform]="'rotate(' + value + 'deg)'">
+              <div class="number" style="--i:1;--clr:#d1386b;"><span>Roket</span></div>
+              <div class="number" style="--i:2;--clr:#bb1d52;"><span>Sidokabul</span></div>
+              <div class="number" style="--i:3;--clr:#b84169;"><span>Sate</span></div>
+              <div class="number" style="--i:4;--clr:#e41258;"><span>Bejo</span></div>
+              <div class="number" style="--i:5;--clr:#b93e67;"><span>Mie Ayam</span></div>
+              <div class="number" style="--i:6;--clr:#da1355;"><span>Ibu Sayur</span></div>
+              <div class="number" style="--i:7;--clr:#c23765;"><span>Nasgor</span></div>
+              <div class="number" style="--i:8;--clr:#963253;"><span>Asmara</span></div>
+           </div>
+         </div>
+      </div>
+    </section>
+     
+ </body>
+  
+ 
