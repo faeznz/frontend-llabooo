@@ -11,12 +11,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TambahdataComponent } from './tambahdata/tambahdata.component';
 import { UbahdataComponent } from './ubahdata/ubahdata.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'tambah', component: TambahdataComponent },
   { path: 'ubah/:id', component: UbahdataComponent },
   { path: 'spinner', component: SpinnerComponent },
+  { path: 'menu', component: MenuComponent },
   { path: '**', redirectTo: '' }
 ];
 
@@ -27,7 +29,8 @@ const routes: Routes = [
     TambahdataComponent,
     UbahdataComponent,
     RupiahPipe,
-    SpinnerComponent
+    SpinnerComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

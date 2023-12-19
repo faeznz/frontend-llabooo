@@ -1,5 +1,5 @@
 // tambahdata.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
@@ -8,11 +8,16 @@ import { ApiService } from '../api.service';
   templateUrl: './tambahdata.component.html',
   styleUrls: ['./tambahdata.component.css'],
 })
-export class TambahdataComponent {
+export class TambahdataComponent implements OnInit{
   newItem: any = { tanggal: '' };
   loading: boolean = false;
+  menus: any[] = [];
 
   constructor(private apiService: ApiService, private router: Router) {}
+
+  ngOnInit() {
+    this.fetchMenus();
+  }
 
   addItem() {
     this.loading = true;
@@ -23,6 +28,19 @@ export class TambahdataComponent {
       },
       (error) => {
         console.error('Gagal menambahkan item', error);
+      }
+    );
+  }
+
+  fetchMenus() {
+    this.apiService.getMenus().subscribe(
+      (menus) => {
+        this.menus = menus;
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching menus:', error);
+        this.loading = false;
       }
     );
   }

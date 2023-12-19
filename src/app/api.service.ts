@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'https://sore-teal-eel-hose.cyclic.app/';
+  // private baseUrl = 'https://sore-teal-eel-hose.cyclic.app/';
+  private baseUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -57,5 +58,24 @@ export class ApiService {
   updateItem(itemId: string, item: any): Observable<void> {
     const url = this.updateItemUrl(itemId);
     return this.http.put<void>(url, item);
+  }
+
+  addMenu(menu: any): Observable<void> {
+    const url = `${this.baseUrl}/menu`;
+    return this.http.post<void>(url, menu);
+  }
+
+  getMenus(): Observable<any[]> {
+    const url = `${this.baseUrl}/menu`;
+    return this.http.get<any[]>(url);
+  }
+
+  deleteMenuUrl(menuId: string): string {
+    return `${this.baseUrl}/menu/${menuId}`;
+  }
+  
+  deleteMenu(menuId: string): Observable<void> {
+    const url = this.deleteMenuUrl(menuId);
+    return this.http.delete<void>(url);
   }
 }

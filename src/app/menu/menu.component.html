@@ -1,0 +1,61 @@
+<head class="w-screen flex justify-between p-2 bg-pink-500 items-center">
+   <button (click)="toggleMenu()" class="text-white px-4 py-2 rounded text-2xl"><i class="fas fa-bars"></i></button>
+   <div class="flex flex-row justify-center items-center gap-2">
+     <img src="../../assets/pizza.png" alt="" class="w-12">
+     <h1 class="text-white text-3xl font-black">Menu</h1>
+   </div>
+ </head>
+ <div id="menu" class="w-screen h-screen absolute flex flex-col z-10 top-0 bg-black/60 justify-between items-left" [ngClass]="{'hidden': !isMenuOpen}">
+   <div class="bg-pink-200 flex flex-col w-full h-full">
+     <div class="flex w-full top-0 p-2">
+       <button (click)="hideMenu()" class="text-pink-500 px-4 py-2 rounded text-2xl"><i class="fa-solid fa-xmark"></i></button>
+     </div>
+ 
+     <div class=" grid grid-cols-3 gap-4">
+       <button class="text-pink-500 text-l font-bold p-5" routerLink="/">
+         <i class="fa-solid fa-house text-3xl"></i>
+         <p class="pt-2">Home</p>
+       </button>
+       <button class="text-pink-500 text-l font-bold p-5" routerLink="/menu">
+         <i class="fa-solid fa-utensils text-3xl"></i>
+         <p class="pt-2">Menu</p>
+       </button>
+       <button class="text-pink-500 text-l font-bold p-5" routerLink="/spinner">
+         <i class="fa-solid fa-dharmachakra text-3xl"></i>
+         <p class="pt-2">Spinner</p>
+       </button>
+     </div>
+   </div>
+ </div>
+ <body>
+   <form class="m-4" (ngSubmit)="addMenu()">
+
+      <div class="flex flex-col my-4">
+        <label for="nama">Tambah Menu </label>
+        <input class="px-4 py-2" type="text" id="nama" name="nama" [(ngModel)]="newMenu.menu">
+      </div>
+  
+      <div class="flex flex-col">
+        <button class="bg-pink-500 text-white px-4 py-2 rounded my-2" type="submit">Tambah</button>
+      </div>
+    </form>
+
+    <div class="w-full max-h-64 overflow-y-auto">
+      <table class="w-full" *ngIf="!loading">
+        <thead class="bg-pink-500 text-white sticky top-0">
+          <tr>
+            <th class="p-2">Menu</th>
+            <th class="m-0 p-0"></th>
+          </tr>
+        </thead>
+         <tbody>
+            <tr *ngFor="let menu of menus">
+               <td class="px-2">{{ menu.menu }}</td>
+               <td class="p-2 text-center">
+                 <button class="bg-pink-500 text-white px-2 py-1 rounded" (click)="deleteMenu(menu._id)"><i class="fa-solid fa-trash"></i></button>
+               </td>
+             </tr>
+         </tbody>
+       </table>
+    </div>
+ </body>
