@@ -13,7 +13,7 @@ import { UbahdataComponent } from './ubahdata/ubahdata.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', component: DashboardComponent },
   { path: 'tambah', component: TambahdataComponent },
   { path: 'ubah/:id', component: UbahdataComponent },
   { path: 'spinner', component: SpinnerComponent },

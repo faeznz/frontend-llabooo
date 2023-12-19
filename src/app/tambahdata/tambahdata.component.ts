@@ -19,7 +19,7 @@ export class TambahdataComponent {
     this.apiService.addItem(this.newItem).subscribe(
       () => {
         console.log('Data item berhasil ditambahkan');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
       (error) => {
         console.error('Gagal menambahkan item', error);
@@ -28,6 +28,6 @@ export class TambahdataComponent {
   }
 
   goBack() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/']);
   }
 }
