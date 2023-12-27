@@ -33,8 +33,8 @@ export class MenuComponent implements OnInit {
     this.apiService.addMenu(this.newMenu).subscribe(
       () => {
         console.log('Data item berhasil ditambahkan');
+        this.fetchMenus();
         this.loading = false;
-        window.location.reload();
       },
       (error) => {
         console.error('Gagal menambahkan item', error);
@@ -43,6 +43,7 @@ export class MenuComponent implements OnInit {
   }
   
   fetchMenus() {
+    this.loading = true;
     this.apiService.getMenus().subscribe(
       (menus) => {
         this.menus = menus;

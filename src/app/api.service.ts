@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'https://sore-teal-eel-hose.cyclic.app/';
+  private baseUrl = 'https://cooperative-seal-pinafore.cyclic.app/';
   // private baseUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
