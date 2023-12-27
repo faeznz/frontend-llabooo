@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
@@ -9,6 +9,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  @ViewChild('namaInput') namaInput!: ElementRef;
   isMenuOpen: boolean = false;
   loading: boolean = false;
   newMenu: any = { };
@@ -35,6 +36,8 @@ export class MenuComponent implements OnInit {
         console.log('Data item berhasil ditambahkan');
         this.fetchMenus();
         this.loading = false;
+        this.newMenu.menu = '';
+        this.namaInput.nativeElement.focus();
       },
       (error) => {
         console.error('Gagal menambahkan item', error);
