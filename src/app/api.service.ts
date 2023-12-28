@@ -78,4 +78,13 @@ export class ApiService {
     const url = this.deleteMenuUrl(menuId);
     return this.http.delete<void>(url);
   }
+
+  saveSisaBudgetUrl(): string {
+    return `${this.baseUrl}/tabungan`; 
+  }
+  
+  getTabunganData(): Observable<any[]> {
+    const tabunganUrl = `${this.baseUrl}/tabungan`;
+    return this.http.get<any[]>(tabunganUrl);
+  }
 }

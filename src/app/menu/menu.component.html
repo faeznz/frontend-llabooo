@@ -1,32 +1,36 @@
 <head class="w-screen flex justify-between p-2 bg-pink-500 items-center">
-   <button (click)="toggleMenu()" class="text-white px-4 py-2 rounded text-2xl"><i class="fas fa-bars"></i></button>
-   <div class="flex flex-row justify-center items-center gap-2">
-     <img src="../../assets/pizza.png" alt="" class="w-12">
-     <h1 class="text-white text-3xl font-black">Menu</h1>
+  <button (click)="toggleMenu()" class="text-white px-4 py-2 rounded text-2xl"><i class="fas fa-bars"></i></button>
+  <div class="flex flex-row justify-center items-center gap-2">
+    <img src="../../assets/pizza.png" alt="" class="w-12">
+    <h1 class="text-white text-3xl font-black">Mammm</h1>
+  </div>
+</head>
+<div id="menu" class="w-screen h-screen absolute flex flex-col z-10 top-0 bg-black/60 justify-between items-left" [ngClass]="{'hidden': !isMenuOpen}">
+  <div class="bg-pink-200 flex flex-col w-full h-full">
+    <div class="flex w-full top-0 p-2">
+      <button (click)="hideMenu()" class="text-pink-500 px-4 py-2 rounded text-2xl"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class=" grid grid-cols-3 gap-4">
+     <button class="text-pink-500 text-l font-bold p-5" routerLink="/">
+       <i class="fa-solid fa-house text-3xl"></i>
+       <p class="pt-2">Home</p>
+     </button>
+     <button class="text-pink-500 text-l font-bold p-5" routerLink="/menu">
+       <i class="fa-solid fa-utensils text-3xl"></i>
+       <p class="pt-2">Menu</p>
+     </button>
+     <button class="text-pink-500 text-l font-bold p-5" routerLink="/spinner">
+       <i class="fa-solid fa-dharmachakra text-3xl"></i>
+       <p class="pt-2">Spinner</p>
+     </button>
+     <button class="text-pink-500 text-l font-bold p-5" routerLink="/tabungan">
+       <i class="fa-solid fa-piggy-bank text-3xl"></i>
+       <p class="pt-2">Tabungan</p>
+     </button>
    </div>
- </head>
- <div id="menu" class="w-screen h-screen absolute flex flex-col z-10 top-0 bg-black/60 justify-between items-left" [ngClass]="{'hidden': !isMenuOpen}">
-   <div class="bg-pink-200 flex flex-col w-full h-full">
-     <div class="flex w-full top-0 p-2">
-       <button (click)="hideMenu()" class="text-pink-500 px-4 py-2 rounded text-2xl"><i class="fa-solid fa-xmark"></i></button>
-     </div>
- 
-     <div class=" grid grid-cols-3 gap-4">
-       <button class="text-pink-500 text-l font-bold p-5" routerLink="/">
-         <i class="fa-solid fa-house text-3xl"></i>
-         <p class="pt-2">Home</p>
-       </button>
-       <button class="text-pink-500 text-l font-bold p-5" routerLink="/menu">
-         <i class="fa-solid fa-utensils text-3xl"></i>
-         <p class="pt-2">Menu</p>
-       </button>
-       <button class="text-pink-500 text-l font-bold p-5" routerLink="/spinner">
-         <i class="fa-solid fa-dharmachakra text-3xl"></i>
-         <p class="pt-2">Spinner</p>
-       </button>
-     </div>
-   </div>
- </div>
+  </div>
+</div>
  <body>
   <div *ngIf="loading" class="w-screen h-screen absolute flex flex-col z-10 top-0 bg-black/70 justify-center items-center">
     <div class="loadingio-spinner-double-ring-cwl4tjctq1"><div class="ldio-ad84adzkb5t">

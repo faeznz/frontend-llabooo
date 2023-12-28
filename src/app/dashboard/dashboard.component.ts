@@ -52,6 +52,7 @@ export class DashboardComponent implements OnInit {
         this.items = items;
         this.calculateTotalHarga();
         this.calculateSisaBudget();
+        this.saveSisaBudget();
         this.loading = false;
       },
       (error) => {
@@ -71,7 +72,9 @@ export class DashboardComponent implements OnInit {
         () => {
           this.items = this.items.filter((i) => i._id !== item._id);
           this.calculateTotalHarga();
+          this.calculateSisaBudget();
           this.fetchWeeklyExpenses();
+          this.saveSisaBudget();
           this.loading = false;
         },
         (error) => {
@@ -131,5 +134,20 @@ export class DashboardComponent implements OnInit {
   hideMenu() {
     this.isMenuOpen = false;
   }
+
+  saveSisaBudget() {
+    const url = this.apiService.saveSisaBudgetUrl();
+    const data = { sisaBudget: this.sisaBudget, month: this.selectedMonth, year: this.selectedYear };
+  
+    this.http.post(url, data).subscribe(
+      () => {
+        console.log('Sisa budget berhasil disimpan.');
+      },
+      (error) => {
+        console.error('Gagal menyimpan sisa budget', error);
+      }
+    );
+  }
+  
 
 }

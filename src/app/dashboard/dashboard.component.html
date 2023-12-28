@@ -25,6 +25,10 @@
         <i class="fa-solid fa-dharmachakra text-3xl"></i>
         <p class="pt-2">Spinner</p>
       </button>
+      <button class="text-pink-500 text-l font-bold p-5" routerLink="/tabungan">
+        <i class="fa-solid fa-piggy-bank text-3xl"></i>
+        <p class="pt-2">Tabungan</p>
+      </button>
     </div>
 
   </div>
@@ -106,6 +110,7 @@
       <div class="flex flex-col items-center m-4">
         <h2 class="mb-2">Sisa Budget Bulan Ini: </h2>
         <div class="border border-pink-500 text-pink-500 w-3/4 p-3 text-center rounded-xl text-xl font-bold">{{ sisaBudget | rupiah }}</div>
+        <!-- <button class="bg-pink-500 text-white px-4 py-2 rounded" (click)="saveSisaBudget()">Simpan Sisa Budget</button> -->
       </div>
 
    </section>
