@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.fetchItems();
-    this.fetchWeeklyExpenses();
   }
 
   fetchItems() {
@@ -52,6 +51,7 @@ export class DashboardComponent implements OnInit {
         this.items = items;
         this.calculateTotalHarga();
         this.calculateSisaBudget();
+        this.fetchWeeklyExpenses();
         this.saveSisaBudget();
         this.loading = false;
       },
@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchWeeklyExpenses() {
-    const weeks = [[1, 8], [9, 16], [17, 24], [25, 32]];
+    const weeks = [[1, 9], [9, 17], [17, 25], [25, 32]];
     this.weeklyExpenses = [];
   
     const promises = weeks.map((week) => {
