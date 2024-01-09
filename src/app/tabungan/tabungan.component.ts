@@ -64,4 +64,20 @@ export class TabunganComponent implements OnInit {
   getMonthName(month: number): string {
     return this.monthMapping[month - 1] || '';
   }
+
+  deleteTabungan(tabunganId: string): void {
+    this.loading = true;
+    this.apiService.deleteTabungan(tabunganId).subscribe(
+      () => {
+        // Refresh data setelah berhasil menghapus
+        this.fetchTabunganData();
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Gagal menghapus data tabungan', error);
+        this.loading = false;
+      }
+    );
+  }
+
 }

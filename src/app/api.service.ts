@@ -87,4 +87,10 @@ export class ApiService {
     const tabunganUrl = `${this.baseUrl}/tabungan`;
     return this.http.get<any[]>(tabunganUrl);
   }
+  
+  deleteTabungan(tabunganId: string): Observable<void> {
+    const url = `${this.baseUrl}/tabungan/${tabunganId}`;
+    return this.http.delete<void>(url);
+}
+
 }

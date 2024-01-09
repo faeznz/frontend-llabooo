@@ -41,6 +41,13 @@
       </div></div>
   </div>
 
+  <section>
+    <h1 class="text-center text-2xl bg-pink-300 py-2">Total Pengeluaran:</h1>
+    <div class="flex flex-col items-center m-4">
+      <div class="bg-pink-500 text-white w-3/4 p-3 text-center rounded-xl text-xl font-bold">{{ totalBudget | rupiah }}</div>
+    </div>
+  </section>
+
     <div class="w-full">
       <body>
         <div *ngIf="loading" class="w-screen h-screen absolute flex flex-col z-10 top-0 bg-black/70 justify-center items-center">
@@ -61,6 +68,7 @@
                 <th class="p-2">Bulan</th>
                 <th class="p-2">Tahun</th>
                 <th class="p-2">Sisa Budget</th>
+                <th class="m-0 p-2"></th>
               </tr>
             </thead>
             <tbody>
@@ -68,6 +76,11 @@
                 <td class="p-2 text-center">{{ data.month }}</td>
                 <td class="p-2 text-center">{{ data.year }}</td>
                 <td class="p-2 text-center">{{ data.sisaBudget | rupiah }}</td>
+                <td class="p-2 text-center">
+                  <button class="bg-pink-500 text-white px-2 py-1 rounded" (click)="deleteTabungan(data._id)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -79,11 +92,3 @@
       </body>
     </div>
  </body>
-
- <section>
-  <h1 class="text-center text-2xl bg-pink-300 py-2">Statistik</h1>
-  <div class="flex flex-col items-center m-4">
-    <h2 class="mb-2">Total Sisa Pengeluaran: </h2>
-    <div class="bg-pink-500 text-white w-3/4 p-3 text-center rounded-xl text-xl font-bold">{{ totalBudget | rupiah }}</div>
-  </div>
-</section>
